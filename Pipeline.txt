@@ -1,0 +1,50 @@
+pipeline {
+    agent {
+        node {
+            label 'Win'
+        }
+    }
+    
+    options {
+        timestamps()
+        buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2'))
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds()
+    }
+    
+    stages {
+        stage('Start') {
+            steps {
+                 echo "Process Start"
+            }
+        }
+		stage('Change Directory') {
+            steps {
+                 bat 'cd C:/Users/saiku/Desktop/Dev_practice/nginx-container'
+            }
+        }
+		stage('Docker build') {
+            steps {
+                bat 'docker build -t kadintisai/nginx-custom:V1 .'
+            }
+        }
+		stage('Docker Push') {
+            steps {
+                bat 'docker push kadintisai/nginx-custom:V1'
+            }
+        }
+	    stage('Docker Run') {
+            steps {
+                bat 'docker run -p 8079:80 --name cutome-nginx-1 -d kadintisai/nginx-custom:V1'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'The pipeline succeed...!!'
+        }
+        failure {
+            echo 'The pipeline failed....!!'
+        }
+    }
+}

@@ -25,22 +25,22 @@ pipeline {
         }
 		stage('Docker build') {
             steps {
-                bat 'docker build -t kadintisai/nginx-ecommerce:V1 -f C:/Users/saiku/Desktop/Dev_practice/nginx-container/Dockerfile .'
+                bat 'docker build -t kadintisai/nginx-snake:V1 -f C:/Users/saiku/Desktop/Dev_practice/nginx-container/Dockerfile .'
             }
         }
 		stage('Docker Push') {
             steps {
-                bat 'docker push kadintisai/nginx-ecommerce:V1 '
+                bat 'docker push kadintisai/nginx-snake:V1 '
             }
         }
 	    stage('Docker Run') {
             steps {
-                bat 'docker run -p 8078:80 --name cutome-ecommerce-1 -d kadintisai/nginx-ecommerce:V1'
+                bat 'docker run -p 8075:80 --name cutome-snake-1 -d kadintisai/nginx-snakeS:V1'
             }
         }
     }
     post {
-        success {
+        Ssuccess {
             echo 'The pipeline succeed...!!'
         }
         failure {

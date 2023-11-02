@@ -35,7 +35,7 @@ pipeline {
         }
 	    stage('Docker Run') {
             steps {
-                bat 'docker run -p 8075:80 --name cutome-snake-1 -d kadintisai/nginx-snakeS:V1'
+                bat 'docker run -p 8075:80 --name cutome-snake-1 -d kadintisai/nginx-snake:V1'
             }
         }
     }

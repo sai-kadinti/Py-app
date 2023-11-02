@@ -25,17 +25,17 @@ pipeline {
         }
 		stage('Docker build') {
             steps {
-                bat 'docker build -t kadintisai/nginx-Ecommerce:V1 -f C:/Users/saiku/Desktop/Dev_practice/nginx-container/Dockerfile .'
+                bat 'docker build -t kadintisai/nginx-ecommerce:V1 -f C:/Users/saiku/Desktop/Dev_practice/nginx-container/Dockerfile .'
             }
         }
 		stage('Docker Push') {
             steps {
-                bat 'docker push kadintisai/nginx-Ecommerce:V1 '
+                bat 'docker push kadintisai/nginx-ecommerce:V1 '
             }
         }
 	    stage('Docker Run') {
             steps {
-                bat 'docker run -p 7070:70 --name cutome-Ecommerce-1 -d kadintisai/nginx-Ecommerce:V1'
+                bat 'docker run -p 7070:70 --name cutome-ecommerce-1 -d kadintisai/nginx-ecommerce:V1'
             }
         }
     }

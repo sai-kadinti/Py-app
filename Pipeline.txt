@@ -7,7 +7,7 @@ pipeline {
     
     options {
         timestamps()
-        buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2'))
+        buildDiscarder(logRotator(artifactNumToKeepStr: '2', numToKeepStr: '2'))
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
     }
@@ -15,33 +15,33 @@ pipeline {
     stages {
         stage('Start') {
             steps {
-                 echo "Process Start"
+                echo "Process Start"
             }
         }
-		stage('Change Directory') {
+        stage('Change Directory') {
             steps {
-                 bat 'cd C:/Users/saiku/Desktop/Dev_practice/nginx-container'
+                bat 'cd C:/Users/saiku/Desktop/Dev_practice/nginx-container'
             }
         }
-		stage('Docker build') {
+        stage('Docker build') {
             steps {
                 bat 'docker build -t kadintisai/nginx-snake:V1 -f C:/Users/saiku/Desktop/Dev_practice/nginx-container/Dockerfile .'
             }
         }
-		stage('Docker Push') {
+        stage('Docker Push') {
             steps {
-                bat 'docker push kadintisai/nginx-snake:V1 '
+                bat 'docker push kadintisai/nginx-snake:V1'
             }
         }
-	    stage('Docker Run') {
+        stage('Docker Run') {
             steps {
-                bat 'docker run -p 8075:80 --name cutome-snake-1 -d kadintisai/nginx-snake:V1'
+                bat 'docker run -p 8075:80 --name custom-snake-1 -d kadintisai/nginx-snake:V1'
             }
         }
     }
     post {
-        Ssuccess {
-            echo 'The pipeline succeed...!!'
+        success {
+            echo 'The pipeline succeeded...!!'
         }
         failure {
             echo 'The pipeline failed....!!'

@@ -18,14 +18,9 @@ pipeline {
                 echo "Process Start"
             }
         }
-        stage('Change Directory') {
-            steps {
-                bat 'cd C:/Users/saiku/Desktop/Dev_practice/nginx-container'
-            }
-        }
         stage('Docker build') {
             steps {
-                bat 'docker build -t kadintisai/nginx-snake:V1 -f C:/Users/saiku/Desktop/Dev_practice/nginx-container/Dockerfile .'
+                bat 'docker build -t kadintisai/nginx-snake:V1 -f /root/Nginx_dir/Dockerfile .'
             }
         }
         stage('Docker Push') {
@@ -35,7 +30,7 @@ pipeline {
         }
         stage('Docker Run') {
             steps {
-                bat 'docker run -p 8075:80 --name custom-snake-1 -d kadintisai/nginx-snake:V1'
+                bat 'docker run -p 8080:80 --name custom-snake-1 -d kadintisai/nginx-snake:V1'
             }
         }
     }

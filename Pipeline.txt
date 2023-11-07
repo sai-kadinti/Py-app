@@ -39,6 +39,11 @@ pipeline {
                 sh 'docker run -p 8080:80 --name custom-snake-1 -d kadintisai/nginx-snake:V1'
             }
         }
+        stage('IP Adderess') {
+            steps {
+                sh 'hostname -I'
+            }
+        }
     }
     post {
         success {

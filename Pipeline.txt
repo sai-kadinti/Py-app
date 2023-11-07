@@ -20,17 +20,17 @@ pipeline {
         }
         stage('Docker build') {
             steps {
-                bat 'docker build -t kadintisai/nginx-snake:V1 -f /root/Nginx_dir/Dockerfile .'
+                sh 'docker build -t kadintisai/nginx-snake:V1 -f /root/Nginx_dir/Dockerfile .'
             }
         }
         stage('Docker Push') {
             steps {
-                bat 'docker push kadintisai/nginx-snake:V1'
+                sh 'docker push kadintisai/nginx-snake:V1'
             }
         }
         stage('Docker Run') {
             steps {
-                bat 'docker run -p 8080:80 --name custom-snake-1 -d kadintisai/nginx-snake:V1'
+                sh 'docker run -p 8080:80 --name custom-snake-1 -d kadintisai/nginx-snake:V1'
             }
         }
     }

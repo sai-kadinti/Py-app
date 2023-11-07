@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Docker build') {
             steps {
-                sh 'docker build -t kadintisai/nginx-snake:V1 -f /root/Nginx_dir/Dockerfile .'
+                sh 'docker build -t kadintisai/nginx-snake:V1 -f /root/workspace/Snake_app/Dockerfile .'
             }
         }
         stage('Docker Push') {

@@ -18,6 +18,11 @@ pipeline {
                 echo "Process Start"
             }
         }
+        stage('Change directory') {
+            steps {
+                sh 'cd /root/Nginx_dir'
+            }
+        }
         stage('Docker build') {
             steps {
                 sh 'docker build -t kadintisai/nginx-snake:V1 -f Dockerfile .'
